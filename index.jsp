@@ -1,27 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Liquor Store</title>
+  <title>Echoing HTML Request Parameters</title>
 </head>
 <body>
-<center>
-    <h1>
-        Select the type of Liquor
-    </h1>
-    <form method="post" action="SelectLiquor">
-       <br>
-        <select name="Type" size="1">
-            <option>WINE</option>
-            <option>WHISKY</option>
-            <option>BEER</option>
-
-        </select>
-        <br><br>
-        <input type="submit">
-    </form>
-</center>
-
-
+  <h3>Choose an author:</h3>
+  <form method="get">
+    <input type="checkbox" name="author" value="Tan Ah Teck">Tan
+    <input type="checkbox" name="author" value="Mohd Ali">Ali
+    <input type="checkbox" name="author" value="Kumar">Kumar
+    <input type="submit" value="Query">
+  </form>
+ 
+  <%
+  String[] authors = request.getParameterValues("author");
+  if (authors != null) {
+  %>
+    <h3>You have selected author(s):</h3>
+    <ul>
+  <%
+      for (int i = 0; i < authors.length; ++i) {
+  %>
+        <li><%= authors[i] %></li>
+  <%
+      }
+  %>
+    <br />
+    <a href="https://www.amazon.com/books-used-books-textbooks/b?ie=UTF8&node=283155">link to amazon</a>
+	<br />
+    </ul>
+    <a href="<%= request.getRequestURI() %>">BACK</a>
+	
+  <%
+  }
+  %>
 </body>
 </html>
